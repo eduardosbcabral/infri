@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func TestGetById(t *testing.T) {
+func TestPostgreGetById(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
@@ -30,7 +30,7 @@ func TestGetById(t *testing.T) {
 	assert.NotNil(t, node)
 }
 
-func TestStore(t *testing.T) {
+func TestPostgreStore(t *testing.T) {
 	node := &models.Node{
 		Ip: "127.0.0.1",
 		Name: "CentOS",
@@ -47,7 +47,7 @@ func TestStore(t *testing.T) {
 
 	n := nodeRepo.NewPostgreNodeRepository(db)
 
-	err = n.Save(context.TODO(), node)
+	err = n.Store(context.TODO(), node)
 	assert.NoError(t, err)
 	assert.Equal(t, int64(10), node.Id)
 }

@@ -3,7 +3,6 @@ package repository
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"github.com/eduardosbcabral/infri/models"
 	"github.com/eduardosbcabral/infri/node"
 	"log"
@@ -45,11 +44,11 @@ func (p *postgreNodeRepository) GetById(ctx context.Context, id int64) (*models.
 			return nil, err
 		}
 	}
-	fmt.Print(result)
+
 	return result, nil
 }
 
-func (p *postgreNodeRepository) Save(ctx context.Context, node *models.Node) error {
+func (p *postgreNodeRepository) Store(ctx context.Context, node *models.Node) error {
 	query := "INSERT node SET ip=?, name=?"
 
 	stmt, err := p.Conn.PrepareContext(ctx, query)
